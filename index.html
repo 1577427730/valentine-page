@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>❤️ 给YMF的情人节礼物 ❤️</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+
+        .heart {
+            animation: float 3s ease-in-out infinite;
+            cursor: pointer;
+        }
+
+        .heart:hover {
+            transform: scale(1.2);
+        }
+
+        .message-box {
+            background: linear-gradient(45deg, #ff7eb3, #ff758c);
+            box-shadow: 0 0 30px rgba(255, 126, 179, 0.3);
+        }
+
+        .text-glow {
+            text-shadow: 0 0 10px rgba(255, 126, 179, 0.8);
+        }
+
+        .floating-heart {
+            position: absolute;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-pink-100 to-red-100 min-h-screen overflow-x-hidden">
+    <!-- 飘落的心 -->
+    <div id="hearts-container" class="fixed inset-0 pointer-events-none"></div>
+
+    <!-- 主要内容 -->
+    <div class="container mx-auto px-4 py-12 relative z-10">
+        <!-- 封面 -->
+        <div class="message-box rounded-2xl p-8 mb-12 text-center text-white">
+            <h1 class="text-4xl font-bold mb-4 text-glow">❤️ 情人节快乐！YMF ❤️</h1>
+            <p class="text-xl mb-4">来自：永远爱你的XHX</p>
+            <div class="heart inline-block text-6xl">💖</div>
+        </div>
+
+        <!-- 甜蜜时间线 -->
+        <div class="grid gap-8 max-w-2xl mx-auto">
+            <!-- 相遇 -->
+            <div class="bg-white rounded-xl p-6 shadow-lg transition-transform duration-300 hover:scale-105">
+                <div class="flex items-center mb-2">
+                    <div class="w-8 h-8 bg-pink-500 rounded-full flex items-center justify-center text-white mr-3">❤️</div>
+                    <h2 class="text-xl font-semibold text-pink-600">我们的相遇</h2>
+                </div>
+                <p class="text-gray-600">那天阳光正好，你的笑容点亮了我的整个世界 🌞</p>
+            </div>
+
+            <!-- 告白 -->
+            <div class="bg-white rounded-xl p-6 shadow-lg transition-transform duration-300 hover:scale-105">
+                <div class="flex items-center mb-2">
+                    <div class="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center text-white mr-3">💌</div>
+                    <h2 class="text-xl font-semibold text-red-600">告白时刻</h2>
+                </div>
+                <p class="text-gray-600">"做我女朋友好吗？" —— 这是我人生最勇敢也最正确的决定 💘</p>
+            </div>
+
+            <!-- 未来 -->
+            <div class="bg-white rounded-xl p-6 shadow-lg transition-transform duration-300 hover:scale-105">
+                <div class="flex items-center mb-2">
+                    <div class="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center text-white mr-3">🌟</div>
+                    <h2 class="text-xl font-semibold text-purple-600">未来展望</h2>
+                </div>
+                <p class="text-gray-600">想和你一起看遍世间美景，吃遍天下美食，直到白发苍苍 👵👴</p>
+            </div>
+        </div>
+
+        <!-- 隐藏惊喜 -->
+        <div class="text-center mt-12">
+            <button onclick="showSurprise()" 
+                    class="bg-pink-500 hover:bg-pink-600 text-white px-8 py-3 rounded-full 
+                           transition-all duration-300 transform hover:scale-110">
+                点击查看惊喜 💝
+            </button>
+            <div id="surprise" class="hidden mt-4 text-2xl font-bold text-pink-600">
+                YMF，我会永远爱你！💞
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 创建飘落的心
+        function createHearts() {
+            const container = document.getElementById('hearts-container');
+            for (let i = 0; i < 20; i++) {
+                const heart = document.createElement('div');
+                heart.innerHTML = '💖';
+                heart.className = 'floating-heart text-2xl opacity-75';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+                heart.style.animationDelay = Math.random() * 5 + 's';
+                container.appendChild(heart);
+            }
+        }
+
+        // 显示隐藏内容
+        function showSurprise() {
+            document.getElementById('surprise').classList.remove('hidden');
+            document.querySelector('button').classList.add('animate-ping');
+            setTimeout(() => {
+                document.querySelector('button').classList.remove('animate-ping');
+            }, 1000);
+        }
+
+        // 初始化
+        window.addEventListener('DOMContentLoaded', () => {
+            createHearts();
+            document.querySelectorAll('.heart').forEach(heart => {
+                heart.addEventListener('click', () => {
+                    heart.style.transform = 'scale(1.5)';
+                    setTimeout(() => {
+                        heart.style.transform = 'scale(1)';
+                    }, 500);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
