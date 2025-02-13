@@ -3,156 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>元宵盛宴</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>XHX & YMF 一周年</title>
+    <script src="https://cdn.tailwindcss.com/3.4.1"></script>
     <style>
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(-5deg); }
-            50% { transform: translateY(-30px) rotate(5deg); }
+        @keyframes progress {
+            0% { width: 0; opacity: 0; }
+            100% { width: 100%; opacity: 1; }
         }
-
-        @keyframes glow {
-            0% { filter: drop-shadow(0 0 5px #ff3366); }
-            50% { filter: drop-shadow(0 0 20px #ff6600); }
-            100% { filter: drop-shadow(0 0 5px #ff3366); }
+        @keyframes fall {
+            0% { transform: translateY(-100vh) rotate(0deg); }
+            100% { transform: translateY(100vh) rotate(360deg); }
         }
-
-        .lantern {
-            animation: float 3s ease-in-out infinite;
-            transform-origin: top center;
-        }
-
-        .tangyuan {
-            background: radial-gradient(circle at 30% 30%, 
-                #fff 20%, 
-                #ffedd5 60%, 
-                #ffd8a8 90%
-            );
-            box-shadow: 0 8px 32px rgba(255, 100, 0, 0.3);
-            position: relative;
-        }
-
-        .tangyuan::after {
-            content: '';
-            position: absolute;
-            top: 15%;
-            left: 25%;
-            width: 20%;
-            height: 20%;
-            background: radial-gradient(circle, 
-                rgba(255,255,255,0.9) 20%, 
-                transparent 60%
-            );
-            border-radius: 50%;
-            transform: rotate(45deg);
-        }
-
-        .spark {
-            background: radial-gradient(circle, 
-                rgba(255,200,0,0.8) 10%, 
-                transparent 60%
-            );
-            animation: sparkle 1s ease-out;
-        }
-
-        @keyframes sparkle {
-            0% { transform: scale(0); opacity: 1; }
-            100% { transform: scale(3); opacity: 0; }
-        }
-
-        .glow-text {
-            text-shadow: 0 0 10px #ff6600,
-                         0 0 20px #ff3366,
-                         0 0 30px #ff0066;
-            animation: text-glow 2s ease-in-out infinite;
-        }
-
-        @keyframes text-glow {
-            50% { text-shadow: 0 0 20px #ff6600,
-                              0 0 40px #ff3366,
-                              0 0 60px #ff0066; }
+        .heart-rain {
+            position: fixed;
+            pointer-events: none;
+            z-index: 0;
         }
     </style>
 </head>
-<body class="bg-gradient-to-br from-purple-900 via-pink-900 to-red-900 min-h-screen overflow-hidden">
-    <!-- 星空背景 -->
-    <div class="absolute inset-0 animate-pulse">
-        <div class="absolute w-1 h-1 bg-white rounded-full" style="top:15%; left:20%"></div>
-        <div class="absolute w-1 h-1 bg-yellow-200 rounded-full" style="top:30%; left:70%"></div>
-        <div class="absolute w-1 h-1 bg-blue-300 rounded-full" style="top:70%; left:40%"></div>
-    </div>
+<body class="relative min-h-screen bg-gradient-to-br from-pink-100 to-rose-50">
+    <!-- 爱心雨 -->
+    <div id="heart-container" class="heart-rain inset-0"></div>
 
-    <!-- 灯笼矩阵 -->
-    <div class="absolute top-0 left-0 right-0 flex justify-between px-8 opacity-50">
-        <div class="lantern w-12 h-16 bg-red-500 rounded-full"></div>
-        <div class="lantern w-10 h-14 bg-orange-400 rounded-full" style="animation-delay: -1s"></div>
-        <div class="lantern w-8 h-12 bg-yellow-400 rounded-full" style="animation-delay: -2s"></div>
-    </div>
-
-    <main class="relative z-10 min-h-screen flex flex-col items-center justify-center">
-        <!-- 标题 -->
-        <h1 class="glow-text text-6xl md:text-8xl font-bold mb-12 text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-red-400 to-pink-300">
-            元<span class="animate-pulse">宵</span>快乐
-        </h1>
-
-        <!-- 3D汤圆组 -->
-        <div class="relative w-64 h-64 mb-16 cursor-pointer" id="tangyuanGroup">
-            <div class="absolute inset-0 flex items-center justify-center">
-                <div class="tangyuan w-24 h-24 rounded-full transform rotate-12"></div>
-                <div class="tangyuan w-32 h-32 rounded-full mx-8"></div>
-                <div class="tangyuan w-24 h-24 rounded-full transform -rotate-12"></div>
+    <div class="relative z-10 text-center pt-8 md:pt-16 space-y-8 md:space-y-12 px-4">
+        <!-- 主标题 -->
+        <div class="space-y-4 md:space-y-6">
+            <h1 class="text-4xl md:text-6xl font-bold text-rose-600 px-2">
+                <span class="bg-clip-text text-transparent bg-gradient-to-r from-rose-600 to-pink-500">
+                    一周年快乐! 哦馍馍！
+                </span>
+            </h1>
+            <div class="text-xl md:text-3xl text-gray-600 flex items-center justify-center">
+                <span class="font-mono bg-rose-100 px-3 py-1 md:px-4 md:py-2 rounded-lg">XHX</span>
+                <span class="mx-2 text-xl md:text-2xl text-rose-400 animate-pulse">❤</span>
+                <span class="font-mono bg-pink-100 px-3 py-1 md:px-4 md:py-2 rounded-lg">YMF</span>
             </div>
-            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-30"></div>
         </div>
 
-        <!-- 动态祝福语 -->
-        <div class="bg-black/30 backdrop-blur-lg rounded-2xl p-8 shadow-2xl transition-all hover:scale-105">
-            <p class="text-3xl md:text-4xl font-serif text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 via-orange-300 to-red-400" id="blessing">
-                <span class="animate-pulse">❤</span> 万家灯火共团圆 <span class="animate-pulse">❤</span>
-            </p>
+        <!-- 时间进度 -->
+        <div class="mx-auto max-w-3xl bg-white/80 backdrop-blur-sm rounded-xl md:rounded-2xl p-4 md:p-8 shadow-lg">
+            <div class="text-xl md:text-3xl text-rose-500 mb-4 md:mb-6 flex items-center justify-center">
+                <span class="mr-2">🌹</span>366天旅程<span class="ml-2">🌹</span>
+            </div>
+            <div class="relative h-2 md:h-3 bg-gray-100 rounded-full overflow-hidden">
+                <div class="absolute left-0 top-0 h-full bg-gradient-to-r from-rose-400 to-pink-400 animate-progress"
+                     style="animation: progress 2s ease-out forwards"></div>
+            </div>
+            <div class="flex justify-between text-gray-500 mt-3 md:mt-4 text-xs md:text-sm">
+                <span>2024.02.13</span>
+                <span>2025.02.13</span>
+            </div>
         </div>
-    </main>
+
+        <!-- 时间统计 -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 max-w-6xl mx-auto">
+            <div class="p-4 md:p-6 bg-white/90 backdrop-blur-sm rounded-lg md:rounded-xl shadow-md hover:transform hover:scale-105 transition-all">
+                <div class="text-3xl md:text-4xl font-bold text-rose-600">8784</div>
+                <div class="text-gray-600 mt-1 md:mt-2 text-sm md:text-base">小时相伴</div>
+            </div>
+            <div class="p-4 md:p-6 bg-white/90 backdrop-blur-sm rounded-lg md:rounded-xl shadow-md hover:transform hover:scale-105 transition-all">
+                <div class="text-3xl md:text-4xl font-bold text-rose-600">527,040</div>
+                <div class="text-gray-600 mt-1 md:mt-2 text-sm md:text-base">分钟心动</div>
+            </div>
+            <div class="p-4 md:p-6 bg-white/90 backdrop-blur-sm rounded-lg md:rounded-xl shadow-md hover:transform hover:scale-105 transition-all">
+                <div class="text-3xl md:text-4xl font-bold text-rose-600">∞</div>
+                <div class="text-gray-600 mt-1 md:mt-2 text-sm md:text-base">永恒爱恋</div>
+            </div>
+        </div>
+
+        <!-- 祝福语 -->
+        <div class="text-base md:text-xl text-gray-600 italic pt-6 md:pt-8 max-w-2xl mx-auto leading-relaxed">
+            “时光会走远，影像能长存<br>
+            愿爱意如同星辰，永恒闪烁”
+        </div>
+    </div>
 
     <script>
-        // 汤圆点击特效
-        document.getElementById('tangyuanGroup').addEventListener('click', (e) => {
-            const spark = document.createElement('div');
-            spark.className = 'spark absolute rounded-full w-24 h-24';
-            spark.style.left = `${e.clientX - 48}px`;
-            spark.style.top = `${e.clientY - 48}px`;
-            document.body.appendChild(spark);
-            setTimeout(() => spark.remove(), 1000);
-        });
-
-        // 动态祝福语
-        const blessings = [
-            "🎆 月圆人圆事事圆",
-            "🏮 花好灯好人人好",
-            "✨ 灯火万家共良宵",
-            "🍡 甜甜蜜蜜庆团圆",
-            "🎇 华灯初上长安乐"
-        ];
-
-        let current = 0;
+        // 移动端优化爱心雨
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.innerHTML = '❤';
+            heart.className = 'absolute text-lg md:text-xl text-rose-300 opacity-75';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animation = `fall ${Math.random() * 3 + 5}s linear infinite`;
+            document.getElementById('heart-container').appendChild(heart);
+        }
+        setInterval(createHeart, 500); // 降低移动端生成频率
+        
+        // 性能优化清理
         setInterval(() => {
-            document.getElementById('blessing').innerHTML = `
-                <span class="animate-pulse">${blessings[current].includes('🎆') ? '🎆' : '🏮'}</span>
-                ${blessings[current]}
-                <span class="animate-pulse">${blessings[current].includes('🎆') ? '🎆' : '🏮'}</span>
-            `;
-            current = (current + 1) % blessings.length;
-        }, 2000);
-
-        // 鼠标跟随特效
-        document.addEventListener('mousemove', (e) => {
-            const trail = document.createElement('div');
-            trail.className = 'absolute w-2 h-2 bg-yellow-300 rounded-full pointer-events-none';
-            trail.style.left = `${e.clientX}px`;
-            trail.style.top = `${e.clientY}px`;
-            trail.style.transform = `scale(${Math.random() * 0.5 + 0.5})`;
-            document.body.appendChild(trail);
-            setTimeout(() => trail.remove(), 500);
-        });
+            const hearts = document.getElementById('heart-container').children;
+            if(hearts.length > 30) { // 减少移动端爱心数量
+                hearts[0].remove();
+            }
+        }, 1000);
     </script>
 </body>
 </html>
